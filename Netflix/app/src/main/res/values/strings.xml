@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Netflix</string>
+    <string name="menu_mensagem">Meu mensagem</string>
+    <string name="menu_volume">menu volume</string>
+    <string name="menu_favoritos">menu favoritos</string>
+    <string name="menu_epizodios">menu epizódios</string>
+</resources>
