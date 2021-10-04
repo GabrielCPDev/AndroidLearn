@@ -9,7 +9,7 @@ public class SegundaActivity extends AppCompatActivity {
 
     private TextView textNome, textIdade;
 
-    @Override
+    @Overrided
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda);
