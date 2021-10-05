@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 conversasFragment = new ConversasFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(frameCOnteudo, conversasFragment);
+                transaction.replace(R.id.frameCOnteudo, conversasFragment);
                 transaction.commit();
             }
         });
