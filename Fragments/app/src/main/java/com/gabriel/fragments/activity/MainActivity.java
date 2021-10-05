@@ -3,6 +3,7 @@ package com.gabriel.fragments.activity;
 import static com.gabriel.fragments.R.id.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -16,9 +17,8 @@ import com.gabriel.fragments.fragment.ConversasFragment;
 public class MainActivity extends AppCompatActivity {
 
     private Button botaoConversa, botaoContato;
-    private ContatosFragment contatosFragment;
-    private ConversasFragment conversasFragment;
-
+    private Fragment contatosFragment;
+    private Fragment conversasFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +44,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 conversasFragment = new ConversasFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frameCOnteudo, conversasFragment);
+                transaction.replace(frameCOnteudo, conversasFragment);
                 transaction.commit();
             }
         });
-
 
         // remover sra da action bar
         getSupportActionBar().setElevation(0);
