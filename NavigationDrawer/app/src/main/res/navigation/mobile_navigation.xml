@@ -20,6 +20,12 @@
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.gabriel.navigationdrawer.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_comunicacao"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_contato"
+        android:name="com.gabriel.navigationdrawer.ui.contato.ContatoFragment"
+        android:label="@string/menu_comunicacao"
         tools:layout="@layout/fragment_slideshow" />
 </navigation>

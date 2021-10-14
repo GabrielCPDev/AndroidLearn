@@ -7,13 +7,30 @@
     tools:context=".activities.MainActivity">
 
     <TextView
+        android:id="@+id/textPrincipal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Primeiro app Gabriel!"
+        android:layout_marginTop="50dp"
+        android:text="Cadastre uma pessoa!"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/campoNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:contentDescription="digite um nome"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Nome"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPrincipal" />
 </androidx.constraintlayout.widget.ConstraintLayout>
