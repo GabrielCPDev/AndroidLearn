@@ -7,13 +7,13 @@ public class Pessoa implements Serializable{
 
     private String nome;
     private Integer idade;
-    private Endereco enderedo;
+    private String enderedo;
 
     public Pessoa(){
 
     }
 
-    public Pessoa(String nome, Integer idade, Endereco enderedo) {
+    public Pessoa(String nome, Integer idade, String enderedo) {
         this.nome = nome;
         this.idade = idade;
         this.enderedo = enderedo;
@@ -35,11 +35,11 @@ public class Pessoa implements Serializable{
         this.idade = idade;
     }
 
-    public Endereco getEnderedo() {
+    public String getEnderedo() {
         return enderedo;
     }
 
-    public void setEnderedo(Endereco enderedo) {
+    public void setEnderedo(String enderedo) {
         this.enderedo = enderedo;
     }
 
@@ -54,5 +54,10 @@ public class Pessoa implements Serializable{
     @Override
     public int hashCode() {
         return Objects.hash(nome);
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 }

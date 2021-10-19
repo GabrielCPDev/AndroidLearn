@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.FormularioPessoaActivity">
+
+    <EditText android:id="@+id/activity_formulario_pessoa_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="textCapWords"
+        android:hint="Nome"/>
+
+    <EditText android:id="@+id/activity_formulario_pessoa_idade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:inputType="number"
+        android:hint="Idade"/>
+
+    <EditText android:id="@+id/activity_formulario_pessoa_endereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="Endereço"/>
+
+    <Button
+        android:id="@+id/botao_cadastrar"
+        android:layout_margin="8dp"
+        android:text="SALVAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

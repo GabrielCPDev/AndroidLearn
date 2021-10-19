@@ -10,6 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CadastroDePessoa">
         <activity
+            android:name=".activities.FormularioPessoaActivity"
+            android:exported="true"/>
+
+        <activity
             android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
