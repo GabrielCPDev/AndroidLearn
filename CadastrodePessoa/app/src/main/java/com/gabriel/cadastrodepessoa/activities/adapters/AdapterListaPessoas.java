@@ -42,14 +42,14 @@ public class AdapterListaPessoas extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = activity.getLayoutInflater().inflate(R.layout.activity_lista_pessoa, parent, false);
         Pessoa p = pessoas.get(position);
-        
+
         campoNome = view.findViewById(R.id.textNome);
         campoIdade = view.findViewById(R.id.textIdade);
         campoEndereco = view.findViewById(R.id.textEndereco);
 
-        campoNome.setText(p.getNome());
-        campoEndereco.setText(p.getEnderedo());
-        campoIdade.setText(p.getIdade());
+        campoNome.setText("Nome: " + p.getNome());
+        campoEndereco.setText("Endereço: " + p.getEnderedo());
+        campoIdade.setText("Idade: " + p.getIdade().toString() + " anos");
         return view;
     }
 
