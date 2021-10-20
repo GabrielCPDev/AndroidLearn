@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gabriel.cadastrodepessoa.R;
+import com.gabriel.cadastrodepessoa.activities.adapters.AdapterListaPessoas;
 import com.gabriel.cadastrodepessoa.dao.PessoaDAO;
 import com.gabriel.cadastrodepessoa.entities.Pessoa;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
     private void configuraLista() {
         listView = findViewById(R.id.listPessoa);
         List<Pessoa> pessoas = dao.listaPessoas();
-        listView.setAdapter(new ArrayAdapter<Pessoa>(this, android.R.layout.simple_list_item_1, pessoas));
+        AdapterListaPessoas adapter = new AdapterListaPessoas(pessoas, this);
+        listView.setAdapter(adapter);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         configuraLista();
-
     }
 }
