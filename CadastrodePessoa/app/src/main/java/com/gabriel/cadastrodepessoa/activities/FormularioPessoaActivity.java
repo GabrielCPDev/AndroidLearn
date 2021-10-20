@@ -23,7 +23,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
 
     private Button botaoSalvar;
     private EditText nome, idade, endereco;
-    private String mensagemDeErro;
+    private String mensagemDeErro = "";
     private PessoaDAO dao = new PessoaDAO();
 
     @Override
@@ -83,7 +83,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
             erros.add("nome");
         }
         if (endereco.getText().toString().equals("") || endereco.getText().toString().equals(null)) {
-            erros.add("endereco");
+            erros.add("endereço");
         }
         if (idade.getText().toString().equals("") || idade.getText().toString().equals(null)) {
             erros.add("idade");
@@ -91,14 +91,16 @@ public class FormularioPessoaActivity extends AppCompatActivity {
 
         if (!erros.isEmpty()) {
             criaMensagemErro(erros);
+            return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public void criaMensagemErro(List<String> campos) {
         String mensage = "Preenchimento de campo: ";
         for (String i : campos) {
-            mensage += ", " + i;
+            mensage += i + ", ";
         }
         mensage += " é obrigatório";
 
