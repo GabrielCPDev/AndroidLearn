@@ -6,7 +6,6 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -18,12 +17,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import br.com.alura.agenda.R;
 import br.com.alura.agenda.dao.AlunoDAO;
 import br.com.alura.agenda.model.Aluno;
+import br.com.alura.agenda.ui.adapter.ListaAlunosAdapter;
 
 public class ListaAlunosActivity extends AppCompatActivity implements ConstantesActivities {
 
 
     private final AlunoDAO dao = new AlunoDAO();
-    private ArrayAdapter<Aluno> adapter;
+    private ListaAlunosAdapter adapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,9 +32,6 @@ public class ListaAlunosActivity extends AppCompatActivity implements Constantes
         setTitle(TITULO_APPBAR_NOVO_ALUNO);
         configuraFabNovoAluno();
         configuraLista();
-
-        dao.salva(new Aluno("Gabriel", "45698774", "gabriel@gmail.com"));
-        dao.salva(new Aluno("Kakaroto", "45698774", "goku@gmail.com"));
 
 
     }
@@ -75,8 +72,7 @@ public class ListaAlunosActivity extends AppCompatActivity implements Constantes
     }
 
     private void atualizaAlunos() {
-        adapter.clear();
-        adapter.addAll(dao.todos());
+        adapter.atualiza(dao.todos());
     }
 
     private void configuraLista() {
@@ -108,9 +104,7 @@ public class ListaAlunosActivity extends AppCompatActivity implements Constantes
     }
 
     private void configuraAdapter(ListView listaDeAlunos) {
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1);
+        adapter =  new ListaAlunosAdapter(this);
         listaDeAlunos.setAdapter(adapter);
     }
 }
