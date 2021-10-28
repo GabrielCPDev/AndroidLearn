@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Agenda</string>
     <string name="menu_aluno_remover">Remover</string>
+    <string name="nome">Nome</string>
+    <string name="telefone">Telefone</string>
+    <string name="e_mail">E-mail</string>
+    <string name="salvar">Salvar</string>
 </resources>
