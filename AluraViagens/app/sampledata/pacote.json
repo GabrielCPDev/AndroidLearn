@@ -1,6 +1,6 @@
 {
-  "imagem": "adfaf",
-  "local": "São Paulo",
-  "dias": "2 dias",
-  "preco": "R4 243,99"
+  "imagem" : "@drawable/sao_paulo_sp",
+  "local" : "São Paulo",
+  "dias" : "2 dias",
+  "preco" : "R$ 243,99"
 }
