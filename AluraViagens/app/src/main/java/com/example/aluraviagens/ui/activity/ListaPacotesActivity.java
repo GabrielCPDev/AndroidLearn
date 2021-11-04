@@ -5,12 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import com.example.aluraviagens.R;
 import com.example.aluraviagens.ui.activity.adapters.ListaPacotesAdapter;
 import com.example.aluraviagens.ui.dao.PacoteDAO;
 import com.example.aluraviagens.ui.models.Pacote;
 
 import java.util.List;
+
+import br.com.alura.aluraviagens.R;
 
 public class ListaPacotesActivity extends AppCompatActivity {
 

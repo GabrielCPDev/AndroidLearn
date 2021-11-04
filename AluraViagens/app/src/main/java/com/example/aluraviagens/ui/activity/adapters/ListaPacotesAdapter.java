@@ -10,9 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
-import com.example.aluraviagens.R;
 import com.example.aluraviagens.ui.models.Pacote;
 import com.example.aluraviagens.utils.DiasUtil;
 import com.example.aluraviagens.utils.MoedaUtil;
@@ -20,6 +17,8 @@ import com.example.aluraviagens.utils.ResourcesUtil;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import br.com.alura.aluraviagens.R;
 
 public class ListaPacotesAdapter extends BaseAdapter {
 
@@ -75,7 +74,7 @@ public class ListaPacotesAdapter extends BaseAdapter {
 
     private void mostraImagem(View viewCriada, Pacote pacote) {
         ImageView imagem = viewCriada.findViewById(R.id.item_pacote_imagem);
-        Drawable drawableImagemPacote = ResourcesUtil.devolveDrawable(context,pacote.getImagem());
+        Drawable drawableImagemPacote = ResourcesUtil.devolveDrawable(context, pacote.getImagem());
         imagem.setImageDrawable(drawableImagemPacote);
     }
 
