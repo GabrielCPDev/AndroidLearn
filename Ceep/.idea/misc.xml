@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Ceep/app/src/main/res/layout/activity_lista_notas.xml" value="0.2359375" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Ceep/app/src/main/res/drawable/fundo_gradiente_insere_nota.xml" value="0.26205128205128203" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Ceep/app/src/main/res/layout/activity_lista_notas.xml" value="0.25" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Ceep/app/src/main/res/layout/activity_nota.xml" value="0.25" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Ceep/app/src/main/res/menu/menu_formulario_nota_salva.xml" value="0.25" />
       </map>
     </option>
   </component>
