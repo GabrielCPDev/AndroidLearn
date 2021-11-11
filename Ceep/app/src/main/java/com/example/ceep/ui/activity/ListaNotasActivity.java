@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ceep.R;
 import com.example.ceep.dao.NotaDAO;
 import com.example.ceep.model.Nota;
 import com.example.ceep.ui.adapter.ListaNotasAdapter;
+import com.example.ceep.ui.adapter.OnItemClickListener;
 
 import java.util.List;
+
+import br.com.alura.ceep.R;
 
 public class ListaNotasActivity extends AppCompatActivity {
 
@@ -68,7 +70,6 @@ public class ListaNotasActivity extends AppCompatActivity {
 
     private void configuraReciclerView(List<Nota> todasNotas) {
         RecyclerView listaDeNotas = findViewById(R.id.lista_notas_recyclerview);
-
         configuraAdapter(todasNotas, listaDeNotas);
         configuraLayoutManager(listaDeNotas);
     }
@@ -76,6 +77,12 @@ public class ListaNotasActivity extends AppCompatActivity {
     private void configuraLayoutManager(RecyclerView listaDeNotas) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         listaDeNotas.setLayoutManager(layoutManager);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick() {
+
+            }
+        });
     }
 
     private void configuraAdapter(List<Nota> todasNotas, RecyclerView listaDeNotas) {
