@@ -3,10 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Fragments/app/src/main/res/layout/activity_main.xml" value="0.24615384615384617" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_contatos.xml" value="0.19583333333333333" />
-        <entry key="app/src/main/res/layout/fragment_conversas.xml" value="0.25" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Executandovideos/app/src/main/res/layout/activity_main.xml" value="0.536" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Executandovideos/app/src/main/res/layout/activity_player.xml" value="0.25" />
       </map>
     </option>
   </component>
