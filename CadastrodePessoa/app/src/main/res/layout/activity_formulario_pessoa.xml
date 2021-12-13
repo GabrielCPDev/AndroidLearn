@@ -12,25 +12,25 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:inputType="textCapWords"
-        android:hint="Nome"/>
+        android:hint="@string/inputNome"/>
 
     <EditText android:id="@+id/activity_formulario_pessoa_idade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:inputType="number"
-        android:hint="Idade"/>
+        android:hint="@string/inputIdade"/>
 
     <EditText android:id="@+id/activity_formulario_pessoa_endereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="Endereço"/>
+        android:hint="@string/inputEndereco"/>
 
     <Button
         android:id="@+id/botao_cadastrar"
         android:layout_margin="8dp"
-        android:text="SALVAR"
+        android:text="@string/btnSalvar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

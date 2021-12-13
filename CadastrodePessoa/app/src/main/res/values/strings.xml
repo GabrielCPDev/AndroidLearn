@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Cadastro de Pessoa</string>
+    <string name="inputNome">Nome</string>
+    <string name="inputIdade">Idade</string>
+    <string name="inputEndereco">Endereço</string>
+    <string name="btnSalvar">Salvar</string>
 </resources>
