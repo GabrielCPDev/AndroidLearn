@@ -31,8 +31,6 @@ public class FormularioPessoaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pessoa);
         setTitle(NOVA_PESSOA);
-
-        PessoaDAO dao = new PessoaDAO();
         inicializaCampos();
         configuraBotaoSalvar();
     }
