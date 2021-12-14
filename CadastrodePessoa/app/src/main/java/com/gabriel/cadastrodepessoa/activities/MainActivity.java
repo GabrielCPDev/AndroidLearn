@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.RequiresApi;
@@ -29,12 +28,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        inicializaCampos();
         configuraFabNovaPessoa();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        configuraLista();
     }
 
     private void configuraFabNovaPessoa() {
-        fab = findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,20 +46,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void inicializaCampos() {
+        fab = findViewById(R.id.fab);
+        listView = findViewById(R.id.listPessoa);
+    }
+
     private void abreFormularioPessoaActivity() {
         startActivity(new Intent(this, FormularioPessoaActivity.class));
     }
 
     private void configuraLista() {
-        listView = findViewById(R.id.listPessoa);
         List<Pessoa> pessoas = dao.listaPessoas();
         AdapterListaPessoas adapter = new AdapterListaPessoas(pessoas, this);
         listView.setAdapter(adapter);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        configuraLista();
-    }
+
 }

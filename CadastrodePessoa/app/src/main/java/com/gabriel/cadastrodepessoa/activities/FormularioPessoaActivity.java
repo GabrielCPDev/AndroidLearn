@@ -46,14 +46,11 @@ public class FormularioPessoaActivity extends AppCompatActivity {
 
     private void configuraBotaoSalvar() {
         botaoSalvar.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (validaDados(nome, endereco, idade)) {
-
                     Pessoa pessoa = constroePessoa();
                     salvaPessoa(pessoa);
-
                 } else {
                     Snackbar.make(view, mensagemDeErro, Snackbar.LENGTH_LONG).show();
                 }
@@ -63,7 +60,6 @@ public class FormularioPessoaActivity extends AppCompatActivity {
 
     private void salvaPessoa(Pessoa pessoa) {
         dao.salva(pessoa);
-        //startActivity(new Intent(FormularioPessoaActivity.this, MainActivity.class));
         finish();
     }
 
@@ -103,8 +99,6 @@ public class FormularioPessoaActivity extends AppCompatActivity {
             mensage += i + ", ";
         }
         mensage += " é obrigatório";
-
         this.mensagemDeErro = mensage;
     }
-
 }
