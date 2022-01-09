@@ -1,5 +1,6 @@
 package com.gabriel.cadastrodepessoa.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
                 if (validaDados(nome, endereco, idade)) {
                     Pessoa pessoa = constroePessoa();
                     salvaPessoa(pessoa);
+                    finish();
                 } else {
                     Snackbar.make(view, mensagemDeErro, Snackbar.LENGTH_LONG).show();
                 }
@@ -57,8 +59,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
     }
 
     private void salvaPessoa(Pessoa pessoa) {
-        dao.salva(pessoa);
-        finish();
+        retornaPessoa(pessoa);
     }
 
     private Pessoa constroePessoa() {
@@ -68,6 +69,12 @@ public class FormularioPessoaActivity extends AppCompatActivity {
         pessoa.setIdade((Integer.parseInt(idade.getText().toString())));
 
         return pessoa;
+    }
+
+    private void retornaPessoa(Pessoa pessoa) {
+        Intent resultadoInsercao = new Intent();
+        resultadoInsercao.putExtra(AppConstantes.CHAVE_PESSOA, pessoa);
+        setResult(AppConstantes.CODIGO_RESULTADO_PESSOA_CRIADA,resultadoInsercao);
     }
 
     private boolean validaDados(EditText nome, EditText endereco, EditText idade) {

@@ -1,6 +1,7 @@
 package com.gabriel.cadastrodepessoa;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;

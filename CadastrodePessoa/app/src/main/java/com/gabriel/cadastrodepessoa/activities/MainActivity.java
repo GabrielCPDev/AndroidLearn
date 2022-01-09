@@ -25,28 +25,31 @@ public class MainActivity extends AppCompatActivity {
     private AdapterListaPessoas adapter;
     private RecyclerView recyclerListaNotas;
     private FloatingActionButton fab;
-    private Pessoa pessoa = new Pessoa();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        inicializaCampos();
-        configuraFabNovaPessoa();
     }
+
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
         List<Pessoa> listaDePessoas = getPessoas();
         configuraRecyclerView(listaDePessoas);
+        inicializaCampos();
+        configuraFabNovaPessoa();
+        super.onStart();
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        adiciona(pessoa);
-    }
+        if (isResultadoComPessoa(requestCode, resultCode, data)) {
+            Pessoa PessoaRecebida = (Pessoa) data.getSerializableExtra(AppConstantes.CHAVE_PESSOA);
+            adiciona(PessoaRecebida);
+        }    }
 
     private void configuraFabNovaPessoa() {
         fab.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
     private List<Pessoa> getPessoas() {
         PessoaDAO dao = new PessoaDAO();
         return dao.listaPessoas();
+    }
+
+    private boolean temPessoa(Intent data){
+        return data.hasExtra(AppConstantes.CHAVE_PESSOA);
+    }
+
+    private boolean isCodigoResultadoPessoaCriada(int resultCode){
+        return resultCode == AppConstantes.CODIGO_RESULTADO_PESSOA_CRIADA;
+    }
+    private boolean isCodigoRequisicaoInserePessoa(int resultCode){
+        return resultCode == AppConstantes.CODIGO_REQUISICAO_INSERE_PESSOA;
+    }
+
+    private boolean isResultadoComPessoa(int requestCode, int resultCode, Intent data) {
+        return isCodigoRequisicaoInserePessoa(requestCode) &&
+                isCodigoResultadoPessoaCriada(resultCode) &&
+                temPessoa(data);
     }
 
 }
