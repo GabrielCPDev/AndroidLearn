@@ -25,7 +25,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
     private Button botaoSalvar;
     private EditText nome, idade, endereco;
     private String mensagemDeErro = "";
-    private PessoaDAO dao = new PessoaDAO();
+    private PessoaDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
         setTitle(NOVA_PESSOA);
         inicializaCampos();
         configuraBotaoSalvar();
+        dao = new PessoaDAO(getApplicationContext());
     }
 
     private void inicializaCampos() {
@@ -59,7 +60,7 @@ public class FormularioPessoaActivity extends AppCompatActivity {
     }
 
     private void salvaPessoa(Pessoa pessoa) {
-        retornaPessoa(pessoa);
+        dao.salva(pessoa);
     }
 
     private Pessoa constroePessoa() {
@@ -71,11 +72,6 @@ public class FormularioPessoaActivity extends AppCompatActivity {
         return pessoa;
     }
 
-    private void retornaPessoa(Pessoa pessoa) {
-        Intent resultadoInsercao = new Intent();
-        resultadoInsercao.putExtra(AppConstantes.CHAVE_PESSOA, pessoa);
-        setResult(AppConstantes.CODIGO_RESULTADO_PESSOA_CRIADA,resultadoInsercao);
-    }
 
     private boolean validaDados(EditText nome, EditText endereco, EditText idade) {
         List<String> erros = new ArrayList<>();

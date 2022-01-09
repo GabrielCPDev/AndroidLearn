@@ -1,20 +1,60 @@
 package com.gabriel.cadastrodepessoa.dao;
 
-import com.gabriel.cadastrodepessoa.entities.Pessoa;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import java.util.ArrayList;
+import com.gabriel.cadastrodepessoa.entities.Pessoa;
+import com.gabriel.cadastrodepessoa.helper.DBHelper;
+
 import java.util.List;
 
-public class PessoaDAO {
+public class PessoaDAO implements IPessoaDAO {
 
-    private final static List<Pessoa> pessoas = new ArrayList<>();
+    private Context context;
+    private SQLiteDatabase escreve;
+    private SQLiteDatabase le;
 
-    public void salva(Pessoa pessoa) {
-        pessoas.add(pessoa);
-
+    public PessoaDAO(Context context) {
+        this.context = context;
+        DBHelper db = new DBHelper(context);
+        escreve = db.getWritableDatabase();
+        le = db.getReadableDatabase();
     }
 
+    @Override
+    public boolean salva(Pessoa pessoa) {
+        try {
+            escreve.insert(DBHelper.TABELA_PESSOAS,null, getContentVelues(pessoa));
+            Log.i("DB LOG", "Tarefa salva com sucesso! ");
+        }catch (Exception e){
+            Log.i("DB LOG", "Erro ao salvar tabela" + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean atualizar(Pessoa pessoa) {
+        return false;
+    }
+
+    @Override
+    public boolean deletar(Pessoa pessoa) {
+        return false;
+    }
+
+    @Override
     public List<Pessoa> listaPessoas() {
-        return new ArrayList<>(pessoas);
+        return null;
+    }
+
+    private ContentValues getContentVelues(Pessoa p){
+        ContentValues cv = new ContentValues();
+        cv.put("nome", p.getNome());
+        cv.put("idade", p.getIdade());
+        cv.put("endereco", p.getEnderedo());
+        return cv;
     }
 }

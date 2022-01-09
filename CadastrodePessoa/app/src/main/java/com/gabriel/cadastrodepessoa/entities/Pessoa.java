@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Pessoa implements Serializable{
 
+    private Long id;
     private String nome;
     private Integer idade;
     private String enderedo;
@@ -13,10 +14,19 @@ public class Pessoa implements Serializable{
 
     }
 
-    public Pessoa(String nome, Integer idade, String enderedo) {
+    public Pessoa(Long id,String nome, Integer idade, String enderedo) {
+        this.id = id;
         this.nome = nome;
         this.idade = idade;
         this.enderedo = enderedo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
