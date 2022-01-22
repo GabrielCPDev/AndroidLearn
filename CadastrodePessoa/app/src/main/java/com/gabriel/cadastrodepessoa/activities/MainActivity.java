@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AppConstantes{
 
     private AdapterListaPessoas adapter;
-    private RecyclerView recyclerListaNotas;
+    private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private PessoaDAO dao;
     private List<Pessoa> pessoas = new ArrayList();
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AppConstantes{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        inicializaCampos();
 
     }
 
@@ -42,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements AppConstantes{
         super.onStart();
         configuraDao();
         pessoas = getPessoas();
-        configuraRecyclerView(pessoas);
-        inicializaCampos();
+        configuraAdapter();
+        configuraRecyclerView();
         configuraFabNovaPessoa();
 
     }
@@ -51,15 +53,6 @@ public class MainActivity extends AppCompatActivity implements AppConstantes{
         dao = Room.databaseBuilder(this, CadastroDB.class, NAME_DATABASE)
                 .allowMainThreadQueries().build().getPessoaDAO();
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (isResultadoComPessoa(requestCode, resultCode, data)) {
-            Pessoa PessoaRecebida = (Pessoa) data.getSerializableExtra(AppConstantes.CHAVE_PESSOA);
-            adiciona(PessoaRecebida);
-        }    }
-
     private void configuraFabNovaPessoa() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,47 +61,28 @@ public class MainActivity extends AppCompatActivity implements AppConstantes{
             }
         });
     }
-    private void adiciona(Pessoa pessoa) {
-        dao.salva(pessoa);
-        adapter.adiciona(pessoa);
-    }
-
     private void inicializaCampos() {
         fab = findViewById(R.id.fab);
-        recyclerListaNotas = findViewById(R.id.listPessoa);
+        recyclerView = findViewById(R.id.listPessoa);
     }
 
     private void abreFormularioPessoaActivity() {
         startActivity(new Intent(this, FormularioPessoaActivity.class));
     }
-    public void configuraRecyclerView(List<Pessoa> pessoas){
-        configuraAdapter(pessoas);
-        adapter.notifyDataSetChanged();
+    public void configuraRecyclerView(){
+
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        this.recyclerView.setAdapter(adapter);
     }
 
-    private void configuraAdapter(List<Pessoa> pessoasList) {
-        adapter = new AdapterListaPessoas(pessoasList,this);
+    private void configuraAdapter() {
+        this.adapter = new AdapterListaPessoas(pessoas,this);
+
     }
 
     private List<Pessoa> getPessoas() {
-        return dao.buscaTodos();
-    }
-
-    private boolean temPessoa(Intent data){
-        return data.hasExtra(AppConstantes.CHAVE_PESSOA);
-    }
-
-    private boolean isCodigoResultadoPessoaCriada(int resultCode){
-        return resultCode == AppConstantes.CODIGO_RESULTADO_PESSOA_CRIADA;
-    }
-    private boolean isCodigoRequisicaoInserePessoa(int resultCode){
-        return resultCode == AppConstantes.CODIGO_REQUISICAO_INSERE_PESSOA;
-    }
-
-    private boolean isResultadoComPessoa(int requestCode, int resultCode, Intent data) {
-        return isCodigoRequisicaoInserePessoa(requestCode) &&
-                isCodigoResultadoPessoaCriada(resultCode) &&
-                temPessoa(data);
+        return this.dao.buscaTodos();
     }
 
 }
