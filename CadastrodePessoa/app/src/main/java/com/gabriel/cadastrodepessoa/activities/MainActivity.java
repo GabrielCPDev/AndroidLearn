@@ -1,32 +1,33 @@
 package com.gabriel.cadastrodepessoa.activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import com.gabriel.cadastrodepessoa.R;
 import com.gabriel.cadastrodepessoa.activities.adapters.AdapterListaPessoas;
-import com.gabriel.cadastrodepessoa.activities.adapters.listeners.OnItemClickListener;
 import com.gabriel.cadastrodepessoa.dao.PessoaDAO;
+import com.gabriel.cadastrodepessoa.db.CadastroDB;
 import com.gabriel.cadastrodepessoa.entities.Pessoa;
-import com.gabriel.cadastrodepessoa.helper.DBHelper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AppConstantes{
 
     private AdapterListaPessoas adapter;
     private RecyclerView recyclerListaNotas;
     private FloatingActionButton fab;
+    private PessoaDAO dao;
+    private List<Pessoa> pessoas = new ArrayList();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -38,12 +39,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-//        List<Pessoa> listaDePessoas = getPessoas();getPessoa
-//        configuraRecyclerView(listaDePessoas);
+        super.onStart();
+        configuraDao();
+        pessoas = getPessoas();
+        configuraRecyclerView(pessoas);
         inicializaCampos();
         configuraFabNovaPessoa();
-        super.onStart();
 
+    }
+    private void configuraDao(){
+        dao = Room.databaseBuilder(this, CadastroDB.class, NAME_DATABASE)
+                .allowMainThreadQueries().build().getPessoaDAO();
     }
 
     @Override
@@ -51,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (isResultadoComPessoa(requestCode, resultCode, data)) {
             Pessoa PessoaRecebida = (Pessoa) data.getSerializableExtra(AppConstantes.CHAVE_PESSOA);
-//            adiciona(PessoaRecebida);
+            adiciona(PessoaRecebida);
         }    }
 
     private void configuraFabNovaPessoa() {
@@ -62,10 +68,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//    private void adiciona(Pessoa pessoa) {
-//        new PessoaDAO().salva(pessoa);
-//        adapter.adiciona(pessoa);
-//    }
+    private void adiciona(Pessoa pessoa) {
+        dao.salva(pessoa);
+        adapter.adiciona(pessoa);
+    }
 
     private void inicializaCampos() {
         fab = findViewById(R.id.fab);
@@ -84,10 +90,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new AdapterListaPessoas(pessoasList,this);
     }
 
-//    private List<Pessoa> getPessoas() {
-//        PessoaDAO dao = new PessoaDAO();
-//        return dao.listaPessoas();
-//    }
+    private List<Pessoa> getPessoas() {
+        return dao.buscaTodos();
+    }
 
     private boolean temPessoa(Intent data){
         return data.hasExtra(AppConstantes.CHAVE_PESSOA);

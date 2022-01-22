@@ -7,9 +7,12 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 
 import com.gabriel.cadastrodepessoa.R;
 import com.gabriel.cadastrodepessoa.dao.PessoaDAO;
+import com.gabriel.cadastrodepessoa.db.CadastroDB;
 import com.gabriel.cadastrodepessoa.entities.Pessoa;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -18,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FormularioPessoaActivity extends AppCompatActivity {
+public class FormularioPessoaActivity extends AppCompatActivity implements AppConstantes{
 
     public static final String NOVA_PESSOA = "Nova Pessoa";
 
@@ -34,7 +37,8 @@ public class FormularioPessoaActivity extends AppCompatActivity {
         setTitle(NOVA_PESSOA);
         inicializaCampos();
         configuraBotaoSalvar();
-        dao = new PessoaDAO(getApplicationContext());
+        dao = Room.databaseBuilder(this, CadastroDB.class, NAME_DATABASE)
+                .allowMainThreadQueries().build().getPessoaDAO();
     }
 
     private void inicializaCampos() {
