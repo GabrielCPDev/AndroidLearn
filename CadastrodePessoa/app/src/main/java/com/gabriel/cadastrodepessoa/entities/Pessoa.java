@@ -1,19 +1,28 @@
 package com.gabriel.cadastrodepessoa.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.io.Serializable;
 import java.util.Objects;
-
+@Entity(tableName = "PESSOAS")
 public class Pessoa implements Serializable{
 
+    @PrimaryKey(autoGenerate = true)
     private Long id;
+    @ColumnInfo(name = "NOME")
     private String nome;
+    @ColumnInfo(name = "IDADE")
     private Integer idade;
+    @ColumnInfo(name = "ENDERECO")
     private String enderedo;
 
     public Pessoa(){
-
     }
 
+    @Ignore
     public Pessoa(Long id,String nome, Integer idade, String enderedo) {
         this.id = id;
         this.nome = nome;
