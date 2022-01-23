@@ -77,7 +77,7 @@ public class AdapterListaPessoas extends RecyclerView.Adapter<AdapterListaPessoa
         }
         public void preencheCampo(Pessoa p){
             campoNome.setText(p.getNome());
-            campoIdade.setText(p.getIdade());
+            campoIdade.setText(p.getIdade().toString());
             campoEndereco.setText(p.getEnderedo());
         }
     }

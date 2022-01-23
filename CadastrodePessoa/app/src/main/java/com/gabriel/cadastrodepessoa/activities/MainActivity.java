@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -24,10 +26,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AppConstantes{
 
-    private AdapterListaPessoas adapter;
-    private RecyclerView recyclerView;
     private FloatingActionButton fab;
     private PessoaDAO dao;
+    private RecyclerView recyclerView;
+    private AdapterListaPessoas adapter;
     private List<Pessoa> pessoas = new ArrayList();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -70,10 +72,11 @@ public class MainActivity extends AppCompatActivity implements AppConstantes{
         startActivity(new Intent(this, FormularioPessoaActivity.class));
     }
     public void configuraRecyclerView(){
-
-        recyclerView.setLayoutManager(
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        this.recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext() );
+        recyclerView.setLayoutManager( layoutManager );
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter( this.adapter );
     }
 
     private void configuraAdapter() {
