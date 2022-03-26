@@ -48,36 +48,37 @@ public class MainActivity extends AppCompatActivity {
 //                });
 
         //Verificando usuario logado
-        FirebaseUser usuarioLogado = auth.getCurrentUser();
-        if(usuarioLogado != null){
-            Log.i("SUCESSO", "usuario logado");
-        }else {
-            Log.i("FALHA ", "usuario nao logado");
-
-        }
+//        FirebaseUser usuarioLogado = auth.getCurrentUser();
+//        if(usuarioLogado != null){
+//            Log.i("SUCESSO", "usuario logado");
+//        }else {
+//            Log.i("FALHA ", "usuario nao logado");
+//
+//        }
 
         //Deslogar usuario
         auth.signOut();
 
         //Logando usuario
-        auth.signInWithEmailAndPassword(
-                "gabrielcpcontato@gmailc.com",
-                "123456")
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                        Log.i("SUCESSO", "usuario fez login");
-                        }else {
-                        Log.i("ERRO", "usuario nao fez login");
-                        }
-                    }
-                });
+//        auth.signInWithEmailAndPassword(
+//                "gabrielcpcontato@gmailc.com",
+//                "123456")
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()){
+//                        Log.i("SUCESSO", "usuario fez login");
+//                        }else {
+//                        Log.i("ERRO", "usuario nao fez login");
+//                        }
+//                    }
+//                });
 
-//        Usuario u = new Usuario("Naruto", "Usumaki",17);
+        Usuario u = new Usuario("Gabriel", "Carvalho",17);
 //        Produto p = new Produto("Lamen","Ichiraku", 10.0 );
 //        usuarios.child("002").setValue(u);
 //        produtos.child("001").setValue(p);
+        usuarios.push().setValue(u);
 
 //        usuarios.addValueEventListener(new ValueEventListener() {
 //            @Override
