@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference usuarios = referencia.child("usuarios");
         DatabaseReference produtos = referencia.child("produtos");
 
+
         //Cadastrando usuario
 //        auth.createUserWithEmailAndPassword(
 //                "gabrielcpcontato@gmailc.com",
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
             Log.i("FALHA ", "usuario nao logado");
 
         }
+
+        //Deslogar usuario
+        auth.signOut();
 
 //        Usuario u = new Usuario("Naruto", "Usumaki",17);
 //        Produto p = new Produto("Lamen","Ichiraku", 10.0 );
