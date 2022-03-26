@@ -59,6 +59,21 @@ public class MainActivity extends AppCompatActivity {
         //Deslogar usuario
         auth.signOut();
 
+        //Logando usuario
+        auth.signInWithEmailAndPassword(
+                "gabrielcpcontato@gmailc.com",
+                "123456")
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                        Log.i("SUCESSO", "usuario fez login");
+                        }else {
+                        Log.i("ERRO", "usuario nao fez login");
+                        }
+                    }
+                });
+
 //        Usuario u = new Usuario("Naruto", "Usumaki",17);
 //        Produto p = new Produto("Lamen","Ichiraku", 10.0 );
 //        usuarios.child("002").setValue(u);
