@@ -32,10 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         Query usuarioPesquisa = usuarios.orderByChild("nome")
                 .equalTo("Gabriel");
-
         Query usuarioPesquisaLimitada = usuarios.orderByKey()
                 .limitToFirst(2);
 
+        Query usuarioPesquisaIdade = usuarios.orderByChild("idade")
+                .startAt(20);
 
         //Cadastrando usuario
 //        auth.createUserWithEmailAndPassword(
