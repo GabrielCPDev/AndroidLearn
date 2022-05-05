@@ -1,44 +1,52 @@
 {
   "project_info": {
-    "project_number": "174561974567",
-    "project_id": "organizze-c04de",
-    "storage_bucket": "organizze-c04de.appspot.com"
+    "project_number": "47489806564",
+    "firebase_url": "https://organizze-e4d54.firebaseio.com",
+    "project_id": "organizze-e4d54",
+    "storage_bucket": "organizze-e4d54.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:174561974567:android:60d8d196ccf3e5e1553102",
+        "mobilesdk_app_id": "1:47489806564:android:4613d61cb93279aa",
         "android_client_info": {
-          "package_name": "com.example.organizze"
+          "package_name": "com.example.jamiltondamasceno.organizze"
         }
       },
       "oauth_client": [
         {
-          "client_id": "174561974567-bug63dr3jalo811bhdtrjlvjipa0vfnt.apps.googleusercontent.com",
+          "client_id": "47489806564-kp1pg03je2rd1tcis6oa6q3me55vsv8s.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.organizze",
-            "certificate_hash": "f9c31b7e2fc3e2d4add8c69221dda79a99d83d6f"
+            "package_name": "com.example.jamiltondamasceno.organizze",
+            "certificate_hash": "691d69cba8233c0c9efcceab7358ecb069d55ca1"
           }
         },
         {
-          "client_id": "174561974567-72v7eaqjdl2vela9cks2l0d8ea3ectfu.apps.googleusercontent.com",
+          "client_id": "47489806564-j9e15rg21el4nf2kc1sdmhojclrrkev7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAIk8AnqGI5TvVEew8G8rcJk3uPjCQF4e8"
+          "current_key": "AIzaSyBtIz0njHj4YihQrfv_T9_uH0U-PJJNo4M"
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 1
+        },
         "appinvite_service": {
+          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "174561974567-72v7eaqjdl2vela9cks2l0d8ea3ectfu.apps.googleusercontent.com",
+              "client_id": "47489806564-j9e15rg21el4nf2kc1sdmhojclrrkev7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
         }
       }
     }
