@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/drawable/ic_cadeado_cinza.xml" value="0.135" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/drawable/ic_email_cinza.xml" value="0.135" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/drawable/ic_pessoa_cinza.xml" value="0.135" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/layout/activity_cadastro.xml" value="0.2" />
+        <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/gabri/AndroidStudioProjects/AdroidLearn/AndroidLearn/Organizze/app/src/main/res/layout/activity_main.xml" value="0.2" />
       </map>
     </option>
