@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Organizze</string>
+    <string name="campos_nao_preenchidos">Todos os campos devem ser preenchidos</string>
 </resources>
