@@ -1,4 +1,4 @@
-package com.gabriel.organizze;
+package com.gabriel.organizze.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.gabriel.organizze.R;
 import com.gabriel.organizze.activities.CadastroActivity;
 import com.gabriel.organizze.activities.LoginActivity;
 
