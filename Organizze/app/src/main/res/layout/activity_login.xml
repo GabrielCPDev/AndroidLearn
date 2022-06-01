@@ -19,7 +19,6 @@
         android:hint="Email"
         android:inputType="textWebEmailAddress|textPersonName"
         android:minHeight="48dp"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
@@ -35,17 +34,16 @@
         android:hint="Senha"
         android:inputType="textPersonName|textPassword"
         android:minHeight="48dp"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/editEmail"
         app:layout_constraintStart_toStartOf="@+id/editEmail"
         app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <Button
-        android:id="@+id/btnCadastro"
+        android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Cadastrar"
+        android:text="entrar"
         app:layout_constraintEnd_toEndOf="@+id/editSenha"
         app:layout_constraintStart_toStartOf="@+id/editSenha"
         app:layout_constraintTop_toBottomOf="@+id/editSenha" />

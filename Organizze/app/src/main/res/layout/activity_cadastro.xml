@@ -31,7 +31,6 @@
         android:ems="10"
         android:hint="Nome"
         android:inputType="textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -46,7 +45,6 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textWebEmailAddress|textPersonName"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/editNome"
         app:layout_constraintStart_toStartOf="@+id/editNome"
         app:layout_constraintTop_toBottomOf="@+id/editNome" />
@@ -61,7 +59,6 @@
         android:ems="10"
         android:hint="Senha"
         android:inputType="textPersonName|textPassword"
-        android:text="Name"
         app:layout_constraintEnd_toEndOf="@+id/editEmail"
         app:layout_constraintStart_toStartOf="@+id/editEmail"
         app:layout_constraintTop_toBottomOf="@+id/editEmail" />
