@@ -2,5 +2,7 @@
     <string name="app_name">Organizze</string>
     <string name="campos_nao_preenchidos">Todos os campos devem ser preenchidos</string>
     <string name="erro_cadastro_usuario">Erro ao cadastrar usuario!</string>
+    <string name="erro_login_usuario">Erro ao fazer login!</string>
+    <string name="sucesso_login_usuario">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_usuario">Usuario cadastrado com sucesso!</string>
 </resources>
