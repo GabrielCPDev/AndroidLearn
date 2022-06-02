@@ -3,6 +3,7 @@ package com.gabriel.organizze.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -54,19 +55,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void fazLogin(String email, String senha) {
         autenticacao = FirebaseConfig.getFirebaseAutenticacao();
-        usuario = new Usuario();
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
+        getUsuario(email, senha);
 
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(
-                            getApplicationContext(),
-                            getString(R.string.sucesso_login_usuario),
-                            Toast.LENGTH_SHORT).show();
+                    getTelaPrincipal();
                 } else {
                     String message = "";
                     try {
@@ -89,5 +85,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void getTelaPrincipal(){
+        startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+        finish();
+    }
+
+    private void getUsuario(String email, String senha) {
+        usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
     }
 }
