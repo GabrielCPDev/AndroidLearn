@@ -1,5 +1,6 @@
 package com.gabriel.organizze.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.gabriel.organizze.databinding.ActivityPrincipalBinding;
@@ -42,7 +43,7 @@ public class PrincipalActivity extends AppCompatActivity {
         binding.menuDespesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "despesa", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), DespesasActivity.class));
             }
         });
     }
@@ -51,7 +52,7 @@ public class PrincipalActivity extends AppCompatActivity {
         binding.menuReceita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "receita", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ReceitasActivity.class));
             }
         });
     }
