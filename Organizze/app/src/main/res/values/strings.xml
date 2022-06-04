@@ -18,4 +18,8 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="textSetValor">R$ 00,00</string>
+    <string name="textInputData">Ex: 22/08/2002</string>
+    <string name="textInputSalario">Ex: salário</string>
+    <string name="textInputSalarioMensal">Ex: salário mensal</string>
 </resources>
