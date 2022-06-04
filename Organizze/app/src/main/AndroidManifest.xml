@@ -12,9 +12,11 @@
         android:theme="@style/Theme.Organizze">
         <activity
             android:name=".activities.DespesasActivity"
+            android:theme="@style/despesaTheme"
             android:exported="false" />
         <activity
             android:name=".activities.ReceitasActivity"
+            android:theme="@style/receitaTheme"
             android:exported="false" />
         <activity
             android:name=".activities.MainActivity"
