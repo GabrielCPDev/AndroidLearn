@@ -8,6 +8,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,16 +30,28 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.toolbar);
+        setFabAdicionaDespesa();
+        setFabAdicionaReceita();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_principal);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+    }
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
+    private void setFabAdicionaDespesa() {
+        binding.menuDespesa.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "despesa", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setFabAdicionaReceita() {
+        binding.menuReceita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "receita", Toast.LENGTH_SHORT).show();
             }
         });
     }

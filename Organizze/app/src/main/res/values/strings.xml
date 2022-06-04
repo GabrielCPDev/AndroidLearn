@@ -5,6 +5,10 @@
     <string name="erro_login_usuario">Erro ao fazer login!</string>
     <string name="sucesso_login_usuario">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_usuario">Usuario cadastrado com sucesso!</string>
+
+
+    <string name="text__fab_menu_despesa">Despesa</string>
+    <string name="text__fab_menu_receita">Receita</string>
     <string name="title_activity_principal">PrincipalActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
