@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.gabriel.organizze.R;
 import com.gabriel.organizze.configs.FirebaseConfig;
 import com.gabriel.organizze.databinding.ActivityCadastroBinding;
+import com.gabriel.organizze.helper.Base64Custom;
 import com.gabriel.organizze.models.Usuario;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,7 +50,7 @@ public class CadastroActivity extends AppCompatActivity {
                 String textoSenha = binding.editSenha.getText().toString();
 
                 if(validaCamposCadastro(textoNome, textoEmail, textoSenha)){
-                    usuario = new Usuario(textoNome, textoEmail, textoSenha);
+                    usuario = new Usuario(null, textoNome, textoEmail, textoSenha);
                     cadastrarUsuario(usuario);
                 } else {
                     Toast.makeText(CadastroActivity.this, getString(R.string.campos_nao_preenchidos), Toast.LENGTH_SHORT).show();
@@ -67,6 +68,8 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if ( task.isSuccessful() ){
+                    usuario.setIdUsuario(Base64Custom.codificarBase64(usuario.getEmail()));
+                    usuario.salvar();
                     finish();
                 }else {
                     String message = "";
