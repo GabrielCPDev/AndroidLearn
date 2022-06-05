@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         verificaUsuarioLogado();
     }
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         if (autenticacao.getCurrentUser() != null){
             getTelaPrincipal();
         }
-
     }
 
     private void getTelaPrincipal() {
