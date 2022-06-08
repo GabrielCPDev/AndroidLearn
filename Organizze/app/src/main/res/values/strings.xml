@@ -5,6 +5,8 @@
     <string name="erro_login_usuario">Erro ao fazer login!</string>
     <string name="sucesso_login_usuario">Sucesso ao fazer login!</string>
     <string name="sucesso_cadastro_usuario">Usuario cadastrado com sucesso!</string>
+    <string name="erro_cadastro_despesa">Todos os campos devem ser preenchidos corretamente!</string>
+    <string name="erro_formato_preco">O formato do valor está incorreto!</string>
 
 
     <string name="text__fab_menu_despesa">Despesa</string>
