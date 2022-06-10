@@ -76,9 +76,13 @@ public class DespesasActivity extends AppCompatActivity {
         try {
             if (!binding.editValor.getText().toString().equals("") &&
                     !binding.editCategoria.getText().toString().equals("") &&
-                    !binding.editDescricao.getText().toString().equals("") &&
-                    !(Double.parseDouble(binding.editValor.getText().toString()) < 0)) {
+                    !binding.editDescricao.getText().toString().equals("")) {
+                if(!(Double.parseDouble(binding.editValor.getText().toString()) <= 0)){
                 return true;
+                }else{
+                Toast.makeText(this, R.string.erro_cadastro_valor, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             } else {
                 Toast.makeText(this, R.string.erro_cadastro_despesa, Toast.LENGTH_SHORT).show();
                 return false;
