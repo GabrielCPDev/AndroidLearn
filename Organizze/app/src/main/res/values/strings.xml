@@ -25,4 +25,5 @@
     <string name="textInputData">Ex: 22/08/2002</string>
     <string name="textInputSalario">Ex: salário</string>
     <string name="textInputSalarioMensal">Ex: salário mensal</string>
+    <string name="title_appbar_cadastro">Cadastro</string>
 </resources>
