@@ -7,7 +7,6 @@ import com.gabriel.organizze.configs.FirebaseConfig;
 import com.gabriel.organizze.databinding.ActivityPrincipalBinding;
 import com.gabriel.organizze.helper.Base64Custom;
 import com.gabriel.organizze.models.Usuario;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gabriel.organizze.R;
@@ -50,6 +45,8 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao = FirebaseConfig.getFirebaseAutenticacao();
     private DatabaseReference database = FirebaseConfig.getFirebaseDatabase();
+    private DatabaseReference usuariosRef = database.child("usuarios").child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()));
+    private ValueEventListener valueEventListenerUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,13 +74,18 @@ public class PrincipalActivity extends AppCompatActivity {
         recuperaResumo();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        usuariosRef.removeEventListener(valueEventListenerUsuario);
+    }
+
     private void setAppbarConfig() {
         binding.toolbar.setTitle("");
     }
 
     private void recuperaResumo(){
-        DatabaseReference usuariosRef = database.child("usuarios").child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()));
-        usuariosRef.addValueEventListener(new ValueEventListener() {
+        valueEventListenerUsuario = usuariosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usuario = snapshot.getValue(Usuario.class);
