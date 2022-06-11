@@ -30,7 +30,7 @@ public class DespesasActivity extends AppCompatActivity {
     private Movimentacao movimentacao;
     private DatabaseReference database = FirebaseConfig.getFirebaseDatabase();
     private FirebaseAuth autenticacao = FirebaseConfig.getFirebaseAutenticacao();
-    private final String tipoDespesa = "";
+    private final String tipoDespesa = "d";
     private Double despesaTotal;
     private Double despesaAtualizada;
     private DatabaseReference usuariosRef = database.child("usuarios")

@@ -29,7 +29,7 @@ public class ReceitasActivity extends AppCompatActivity {
     private Movimentacao movimentacao;
     private DatabaseReference database = FirebaseConfig.getFirebaseDatabase();
     private FirebaseAuth autenticacao = FirebaseConfig.getFirebaseAutenticacao();
-    private final String tipoReceita = "";
+    private final String tipoReceita = "r";
     private Double receitaTotal;
     private Double receitaAtualizada;
     private DatabaseReference usuariosRef = database.child("usuarios")
