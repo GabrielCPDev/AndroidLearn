@@ -26,4 +26,5 @@
     <string name="textInputSalario">Ex: salário</string>
     <string name="textInputSalarioMensal">Ex: salário mensal</string>
     <string name="title_appbar_cadastro">Cadastro</string>
+    <string name="app_sair">sair</string>
 </resources>

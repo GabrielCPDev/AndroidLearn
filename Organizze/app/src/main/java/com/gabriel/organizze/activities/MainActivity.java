@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public void verificaUsuarioLogado(){
         autenticacao = FirebaseConfig.getFirebaseAutenticacao();
         if (autenticacao.getCurrentUser() != null){
+            autenticacao.signOut();
             getTelaPrincipal();
         }
     }
