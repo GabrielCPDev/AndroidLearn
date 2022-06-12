@@ -16,6 +16,7 @@ import java.util.List;
 public class Movimentacao {
 
     private final String node = "movimentacao";
+    private String id;
     private String data;
     private String categoria;
     private String descricao;
@@ -32,6 +33,14 @@ public class Movimentacao {
         this.descricao = descricao;
         this.tipo = tipo;
         this.valor = valor;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getData() {

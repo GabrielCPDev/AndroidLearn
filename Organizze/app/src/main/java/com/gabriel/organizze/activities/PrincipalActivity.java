@@ -1,5 +1,6 @@
 package com.gabriel.organizze.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,18 +12,22 @@ import com.gabriel.organizze.models.Movimentacao;
 import com.gabriel.organizze.models.Usuario;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gabriel.organizze.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,7 +40,6 @@ import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PrincipalActivity extends AppCompatActivity {
 
@@ -70,8 +74,8 @@ public class PrincipalActivity extends AppCompatActivity {
         setFabAdicionaDespesa();
         setFabAdicionaReceita();
         setCalendarConfig();
-
         setRecyclerViewConfig();
+        swipe();
     }
     @Override
     protected void onResume() {
@@ -96,15 +100,14 @@ public class PrincipalActivity extends AppCompatActivity {
                 movimentacoes.clear();
                 for(DataSnapshot dados : snapshot.getChildren()){
                     Movimentacao movimentacao = dados.getValue(Movimentacao.class);
+                    movimentacao.setId(dados.getKey());
                     movimentacoes.add(movimentacao);
                 }
                 adapterMovimentacao.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
     private void setAppbarConfig() {
@@ -123,9 +126,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
         });
     }
 
@@ -146,6 +147,80 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void swipe(){
+        ItemTouchHelper.Callback itemTouch = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+                int dragFlags = ItemTouchHelper.ACTION_STATE_IDLE;
+                int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
+                return makeMovementFlags(dragFlags, swipeFlags);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                excluirMovimentacao(viewHolder);
+            }
+        };
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
+    }
+
+    private void excluirMovimentacao(RecyclerView.ViewHolder viewHolder){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog alert;
+
+        builder.setTitle(R.string.title_excluir_movimentacao_dialog);
+        builder.setMessage(R.string.message_excluir_movimentacao_dialog);
+        builder.setCancelable(false);
+
+        setEventToClickOnDialog(builder, viewHolder);
+        alert = builder.create();
+        alert.show();
+    }
+
+    private void setEventToClickOnDialog(AlertDialog.Builder alertDialog, RecyclerView.ViewHolder viewHolder) {
+        alertDialog.setPositiveButton(R.string.btn_positive_excluir_movimentacao_dialog, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                int position = viewHolder.getAdapterPosition();
+                Movimentacao movimentacaoSelecionada = movimentacoes.get(position);
+                excluirMovimentacaoDoBanco(movimentacaoSelecionada);
+                adapterMovimentacao.notifyItemRemoved(position);
+                Toast.makeText(PrincipalActivity.this, "Item excluído", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        alertDialog.setNegativeButton(R.string.btn_negative_excluir_movimentacao_dialog, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(PrincipalActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
+                adapterMovimentacao.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void excluirMovimentacaoDoBanco(Movimentacao movimentacaoSelecionada) {
+        movimentacoesRef.child(movimentacaoSelecionada.getId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(PrincipalActivity.this,
+                            "Item excluído",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(
+                            PrincipalActivity.this,
+                            "Item excluído",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void setBindings() {

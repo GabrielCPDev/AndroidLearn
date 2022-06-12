@@ -28,4 +28,8 @@
     <string name="title_appbar_cadastro">Cadastro</string>
     <string name="app_sair">sair</string>
     <string name="textSaldoGeral">saldo geral</string>
+    <string name="title_excluir_movimentacao_dialog">Excluir movimentação da conta</string>
+    <string name="message_excluir_movimentacao_dialog">Você tem certeza que deseja excluir essa movimentação?</string>
+    <string name="btn_positive_excluir_movimentacao_dialog">Confirmar</string>
+    <string name="btn_negative_excluir_movimentacao_dialog">Cancelar</string>
 </resources>
