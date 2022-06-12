@@ -77,12 +77,14 @@ public class PrincipalActivity extends AppCompatActivity {
         setRecyclerViewConfig();
         swipe();
     }
+
     @Override
     protected void onResume() {
         super.onResume();
         recuperaResumo();
         recuperaMovimentacoes();
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -92,13 +94,13 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private void recuperaMovimentacoes() {
         movimentacoesRef = database.child("movimentacao")
-                                   .child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()))
-                                    .child(mesAnoSelecionado);
+                .child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()))
+                .child(mesAnoSelecionado);
         valueEventListenerMovimentacoes = movimentacoesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 movimentacoes.clear();
-                for(DataSnapshot dados : snapshot.getChildren()){
+                for (DataSnapshot dados : snapshot.getChildren()) {
                     Movimentacao movimentacao = dados.getValue(Movimentacao.class);
                     movimentacao.setId(dados.getKey());
                     movimentacoes.add(movimentacao);
@@ -107,9 +109,11 @@ public class PrincipalActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
     }
+
     private void setAppbarConfig() {
         binding.toolbar.setTitle("");
     }
@@ -126,8 +130,19 @@ public class PrincipalActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
         });
+    }
+
+    private void atualizarSaldo(Movimentacao movimentacao) {
+        if (movimentacao.getTipo().contentEquals("r")) {
+            usuario.setReceitaTotal(saldoTotal -= movimentacao.getValor());
+            usuariosRef.child("receitaTotal").setValue(usuario.getReceitaTotal());
+        } else {
+            usuario.setReceitaTotal(saldoTotal += movimentacao.getValor());
+            usuariosRef.child("despesaTotal").setValue(usuario.getDespesaTotal());
+        }
     }
 
     @Override
@@ -149,7 +164,7 @@ public class PrincipalActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void swipe(){
+    private void swipe() {
         ItemTouchHelper.Callback itemTouch = new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
@@ -171,7 +186,7 @@ public class PrincipalActivity extends AppCompatActivity {
         new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
     }
 
-    private void excluirMovimentacao(RecyclerView.ViewHolder viewHolder){
+    private void excluirMovimentacao(RecyclerView.ViewHolder viewHolder) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         AlertDialog alert;
 
@@ -191,6 +206,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 int position = viewHolder.getAdapterPosition();
                 Movimentacao movimentacaoSelecionada = movimentacoes.get(position);
                 excluirMovimentacaoDoBanco(movimentacaoSelecionada);
+                atualizarSaldo(movimentacaoSelecionada);
                 adapterMovimentacao.notifyItemRemoved(position);
                 Toast.makeText(PrincipalActivity.this, "Item excluído", Toast.LENGTH_SHORT).show();
 
