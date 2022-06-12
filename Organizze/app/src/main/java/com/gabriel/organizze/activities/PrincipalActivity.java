@@ -3,9 +3,11 @@ package com.gabriel.organizze.activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.gabriel.organizze.components.AdapterMovimentacao;
 import com.gabriel.organizze.configs.FirebaseConfig;
 import com.gabriel.organizze.databinding.ActivityPrincipalBinding;
 import com.gabriel.organizze.helper.Base64Custom;
+import com.gabriel.organizze.models.Movimentacao;
 import com.gabriel.organizze.models.Usuario;
 
 import androidx.annotation.NonNull;
@@ -17,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gabriel.organizze.R;
@@ -31,22 +33,29 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnMonthChangedListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private MaterialCalendarView calendarView;
     private TextView textSaudacao;
     private TextView textSaldo;
     private RecyclerView recyclerView;
+    private AdapterMovimentacao adapterMovimentacao;
     private ActivityPrincipalBinding binding;
     private Usuario usuario;
+    private String mesAnoSelecionado;
+    private List<Movimentacao> movimentacoes = new ArrayList<>();
     private Double saldoTotal = 0.0;
 
     private FirebaseAuth autenticacao = FirebaseConfig.getFirebaseAutenticacao();
     private DatabaseReference database = FirebaseConfig.getFirebaseDatabase();
     private DatabaseReference usuariosRef = database.child("usuarios").child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()));
+    private DatabaseReference movimentacoesRef;
     private ValueEventListener valueEventListenerUsuario;
+    private ValueEventListener valueEventListenerMovimentacoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,30 +70,48 @@ public class PrincipalActivity extends AppCompatActivity {
         setFabAdicionaDespesa();
         setFabAdicionaReceita();
         setCalendarConfig();
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        setRecyclerViewConfig();
     }
-
     @Override
     protected void onResume() {
         super.onResume();
         recuperaResumo();
+        recuperaMovimentacoes();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
         usuariosRef.removeEventListener(valueEventListenerUsuario);
+        movimentacoesRef.removeEventListener(valueEventListenerMovimentacoes);
     }
 
+    private void recuperaMovimentacoes() {
+        movimentacoesRef = database.child("movimentacao")
+                                   .child(Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail()))
+                                    .child(mesAnoSelecionado);
+        valueEventListenerMovimentacoes = movimentacoesRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                movimentacoes.clear();
+                for(DataSnapshot dados : snapshot.getChildren()){
+                    Movimentacao movimentacao = dados.getValue(Movimentacao.class);
+                    movimentacoes.add(movimentacao);
+                }
+                adapterMovimentacao.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     private void setAppbarConfig() {
         binding.toolbar.setTitle("");
     }
 
-    private void recuperaResumo(){
+    private void recuperaResumo() {
         valueEventListenerUsuario = usuariosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,7 +137,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuSair: {
                 autenticacao.signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -129,12 +156,20 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     private void setCalendarConfig() {
+        CalendarDay dataAtual = calendarView.getCurrentDate();
+        mesAnoSelecionado = getMesFormatado(dataAtual.getMonth()) + dataAtual.getYear();
         calendarView.setOnMonthChangedListener(new OnMonthChangedListener() {
             @Override
             public void onMonthChanged(MaterialCalendarView widget, CalendarDay date) {
-                Log.i("TAG", "onMonthChanged: " + date.getMonth());
+                mesAnoSelecionado = getMesFormatado(date.getMonth()) + date.getYear();
+                movimentacoesRef.removeEventListener(valueEventListenerMovimentacoes);
+                recuperaMovimentacoes();
             }
         });
+    }
+
+    private String getMesFormatado(int month) {
+        return month < 10 ? "0" + String.valueOf(month + 1) : String.valueOf(month + 1);
     }
 
     private void setFabAdicionaDespesa() {
@@ -153,5 +188,13 @@ public class PrincipalActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ReceitasActivity.class));
             }
         });
+    }
+
+    private void setRecyclerViewConfig() {
+        adapterMovimentacao = new AdapterMovimentacao(movimentacoes, getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapterMovimentacao);
     }
 }
