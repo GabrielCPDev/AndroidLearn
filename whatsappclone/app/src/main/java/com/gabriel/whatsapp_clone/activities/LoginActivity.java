@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
-    private Usuario usuario;
+    FirebaseUser currentUser;
     private FirebaseAuth auth;
     private OnCompleteListener<AuthResult> authListener;
     @Override
@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+        getTelaPrincipal();
     }
 
     private void setBtnLogin() {
@@ -68,8 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    FirebaseUser currentUser = auth.getCurrentUser();
-                    getTelaPrincipal(currentUser);
+                    currentUser = auth.getCurrentUser();
+                    getTelaPrincipal();
                 } else {
                     String message = "";
                     try {
@@ -90,11 +92,13 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    private void getTelaPrincipal(FirebaseUser currentUser) {
+    private void getTelaPrincipal() {
+        if (currentUser != null){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra("usuarioLogado", currentUser);
         startActivity(intent);
         finish();
+        }
     }
 
     private Boolean emailESenhaIsEmpty(String email, String senha){
