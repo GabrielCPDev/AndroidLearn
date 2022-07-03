@@ -11,4 +11,5 @@
     <string name="erroCadastroUsuarioEmail">Por favor digite um email válido!</string>
     <string name="erroCadastroUsuarioSenha">Digite uma senha mais forte!</string>
     <string name="erroCadastroUsuarioExistente">Esse usuário já está cadastrado!</string>
+    <string name="erroLoginUsuario">Usuario ou senha inválido!</string>
 </resources>
