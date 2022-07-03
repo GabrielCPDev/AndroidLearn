@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">whatsapp-clone</string>
+    <string name="textInputSenha">Digite sua Senha</string>
+    <string name="textInputEmail">Digite seu Email</string>
+    <string name="botaoLogar">logar</string>
+    <string name="textNaoTemConta">Não tem conta? Cadastre-se</string>
+    <string name="textInputNome">Digite seu nome</string>
+    <string name="textBtnCadastrar">cadastrar</string>
+    <string name="sucessoCadastroUsuario">Usuário cadastrado com sucesso!</string>
+    <string name="erroCadastroUsuario">Erro ao cadastrar usuario!</string>
+    <string name="erroCadastroUsuarioEmail">Por favor digite um email válido!</string>
+    <string name="erroCadastroUsuarioSenha">Digite uma senha mais forte!</string>
+    <string name="erroCadastroUsuarioExistente">Esse usuário já está cadastrado!</string>
 </resources>
