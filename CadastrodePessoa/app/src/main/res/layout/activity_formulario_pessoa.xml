@@ -11,33 +11,33 @@
         android:id="@+id/activity_formulario_pessoa_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8"
         android:hint="@string/inputNome"
         android:inputType="textCapWords"
-        android:minHeight="48dp" />
+        android:minHeight="@dimen/margin_48" />
 
     <EditText
         android:id="@+id/activity_formulario_pessoa_idade"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8"
         android:hint="@string/inputIdade"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:minHeight="@dimen/margin_48" />
 
     <EditText
         android:id="@+id/activity_formulario_pessoa_endereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8"
         android:hint="@string/inputEndereco"
-        android:minHeight="48dp" />
+        android:minHeight="@dimen/margin_48" />
 
     <Button
         android:id="@+id/botao_cadastrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/margin_8"
         android:text="@string/btnSalvar" />
 
 </LinearLayout>
