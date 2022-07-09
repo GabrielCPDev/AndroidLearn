@@ -1,6 +1,6 @@
 package com.gabriel.cadastrodepessoa.activities;
 
-public interface AppConstantes {
+public interface AppConstants {
 
     String CHAVE_PESSOA = "nota";
     int CODIGO_RESULTADO_PESSOA_CRIADA = 2;

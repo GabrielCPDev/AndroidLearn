@@ -8,26 +8,26 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.Objects;
 @Entity(tableName = "PESSOAS")
-public class Pessoa implements Serializable{
+public class Person implements Serializable{
 
     @PrimaryKey(autoGenerate = true)
     private Long id;
     @ColumnInfo(name = "NOME")
-    private String nome;
+    private String name;
     @ColumnInfo(name = "IDADE")
-    private Integer idade;
+    private Integer age;
     @ColumnInfo(name = "ENDERECO")
-    private String enderedo;
+    private String address;
 
-    public Pessoa(){
+    public Person(){
     }
 
     @Ignore
-    public Pessoa(Long id,String nome, Integer idade, String enderedo) {
+    public Person(Long id, String name, Integer age, String address) {
         this.id = id;
-        this.nome = nome;
-        this.idade = idade;
-        this.enderedo = enderedo;
+        this.name = name;
+        this.age = age;
+        this.address = address;
     }
 
     public Long getId() {
@@ -38,45 +38,45 @@ public class Pessoa implements Serializable{
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getIdade() {
-        return idade;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setIdade(Integer idade) {
-        this.idade = idade;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getEnderedo() {
-        return enderedo;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEnderedo(String enderedo) {
-        this.enderedo = enderedo;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return nome.equals(pessoa.nome);
+        Person person = (Person) o;
+        return name.equals(person.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
-        return nome;
+        return name;
     }
 }

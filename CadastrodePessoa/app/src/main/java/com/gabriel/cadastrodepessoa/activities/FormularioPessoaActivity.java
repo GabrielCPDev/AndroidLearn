@@ -1,6 +1,5 @@
 package com.gabriel.cadastrodepessoa.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,76 +7,71 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
-import androidx.room.RoomDatabase;
 
 import com.gabriel.cadastrodepessoa.R;
-import com.gabriel.cadastrodepessoa.dao.PessoaDAO;
-import com.gabriel.cadastrodepessoa.db.CadastroDB;
-import com.gabriel.cadastrodepessoa.entities.Pessoa;
+import com.gabriel.cadastrodepessoa.dao.PersonDAO;
+import com.gabriel.cadastrodepessoa.db.RegisterDB;
+import com.gabriel.cadastrodepessoa.entities.Person;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class FormularioPessoaActivity extends AppCompatActivity implements AppConstantes{
+public class FormularioPessoaActivity extends AppCompatActivity implements AppConstants {
 
-    public static final String NOVA_PESSOA = "Nova Pessoa";
-
-    private Button botaoSalvar;
-    private EditText nome, idade, endereco;
-    private String mensagemDeErro = "";
-    private PessoaDAO dao;
+    private Button btnSave;
+    private EditText name, age, adress;
+    private String errorMessage = "";
+    private PersonDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_pessoa);
-        setTitle(NOVA_PESSOA);
-        inicializaCampos();
-        configuraBotaoSalvar();
-        dao = Room.databaseBuilder(this, CadastroDB.class, NAME_DATABASE)
-                .allowMainThreadQueries().build().getPessoaDAO();
+        setTitle(getString(R.string.title_appbar_new_person));
+        initFields();
+        configSaveButton();
+        dao = Room.databaseBuilder(this, RegisterDB.class, NAME_DATABASE)
+                .allowMainThreadQueries().build().getPersonDAO();
     }
 
-    private void inicializaCampos() {
-        botaoSalvar = findViewById(R.id.botao_cadastrar);
-        nome = findViewById(R.id.activity_formulario_pessoa_nome);
-        endereco = findViewById(R.id.activity_formulario_pessoa_endereco);
-        idade = findViewById(R.id.activity_formulario_pessoa_idade);
+    private void initFields() {
+        btnSave = findViewById(R.id.botao_cadastrar);
+        name = findViewById(R.id.activity_formulario_pessoa_nome);
+        adress = findViewById(R.id.activity_formulario_pessoa_endereco);
+        age = findViewById(R.id.activity_formulario_pessoa_idade);
     }
 
-    private void configuraBotaoSalvar() {
-        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+    private void configSaveButton() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (validaDados(nome, endereco, idade)) {
-                    Pessoa pessoa = constroePessoa();
-                    salvaPessoa(pessoa);
+                if (isValidFields(name, adress, age)) {
+                    Person person = registerPerson();
+                    savePeople(person);
                     finish();
                 } else {
-                    Snackbar.make(view, mensagemDeErro, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, errorMessage, Snackbar.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private void salvaPessoa(Pessoa pessoa) {
-        dao.salva(pessoa);
+    private void savePeople(Person person) {
+        dao.save(person);
     }
 
-    private Pessoa constroePessoa() {
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(nome.getText().toString());
-        pessoa.setEnderedo(endereco.getText().toString());
-        pessoa.setIdade((Integer.parseInt(idade.getText().toString())));
+    private Person registerPerson() {
+        Person person = new Person();
+        person.setName(name.getText().toString());
+        person.setAddress(adress.getText().toString());
+        person.setAge((Integer.parseInt(age.getText().toString())));
 
-        return pessoa;
+        return person;
     }
 
 
-    private boolean validaDados(EditText nome, EditText endereco, EditText idade) {
+    private boolean isValidFields(EditText nome, EditText endereco, EditText idade) {
         List<String> erros = new ArrayList<>();
 
         if (nome.getText().toString().equals("") || nome.getText().toString().equals(null)) {
@@ -91,19 +85,19 @@ public class FormularioPessoaActivity extends AppCompatActivity implements AppCo
         }
 
         if (!erros.isEmpty()) {
-            criaMensagemErro(erros);
+            getErrorMessage(erros);
             return false;
         } else {
             return true;
         }
     }
 
-    public void criaMensagemErro(List<String> campos) {
+    public void getErrorMessage(List<String> campos) {
         String mensage = "Preenchimento de campo: ";
         for (String i : campos) {
             mensage += i + ", ";
         }
         mensage += " é obrigatório";
-        this.mensagemDeErro = mensage;
+        this.errorMessage = mensage;
     }
 }
