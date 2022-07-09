@@ -5,7 +5,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements AppConstants{
     }
 
     private void openFormPersonActivity() {
-        startActivity(new Intent(this, FormularioPessoaActivity.class));
+        startActivity(new Intent(this, FormPersonActivity.class));
     }
     public void configRecyclerView(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getApplicationContext() );
@@ -91,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements AppConstants{
             @Override
             public void onItemClick(Person person, int posicao) {
                 Intent openFormWithPerson = new Intent(MainActivity.this,
-                        FormularioPessoaActivity.class);
+                        FormPersonActivity.class);
                 openFormWithPerson.putExtra(KEY_PERSON, person);
                 openFormWithPerson.putExtra(KEY_POSITION, posicao);
                 startActivityForResult(openFormWithPerson, CODIGO_REQUISICAO_ALTERA_NOTA);
