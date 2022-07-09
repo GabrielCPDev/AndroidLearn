@@ -20,7 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormularioPessoaActivity extends AppCompatActivity implements AppConstants {
+public class FormPersonActivity extends AppCompatActivity implements AppConstants {
 
     private Button btnSave;
     private EditText name, age, adress;

@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.rule.ActivityTestRule
-import com.gabriel.cadastrodepessoa.activities.FormularioPessoaActivity
+import com.gabriel.cadastrodepessoa.activities.FormPersonActivity
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -23,8 +23,8 @@ class MainActivityViewTest {
 
 
     @get:Rule
-    var activityRule: ActivityTestRule<FormularioPessoaActivity>
-            = ActivityTestRule(FormularioPessoaActivity::class.java)
+    var activityRule: ActivityTestRule<FormPersonActivity>
+            = ActivityTestRule(FormPersonActivity::class.java)
 
 
     @Before
