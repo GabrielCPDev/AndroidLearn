@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">Cadastro de Pessoa</string>
     <string name="title_appbar_new_person">Nova Pessoa</string>
+    <string name="title_appbar_update_person">Altera Pessoa</string>
     <string name="inputNome">Nome</string>
     <string name="inputIdade">Idade</string>
     <string name="inputEndereco">Endereço</string>
     <string name="btnSalvar">Salvar</string>
+    <string name="message_person_updated">Pessoa atualizada com sucesso</string>
+    <string name="message_person_saved">Pessoa salva com sucesso</string>
 </resources>

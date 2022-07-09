@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.room.Room;
 
 import com.gabriel.cadastrodepessoa.R;
 import com.gabriel.cadastrodepessoa.activities.adapters.AdapterListPerson;
+import com.gabriel.cadastrodepessoa.activities.adapters.listeners.OnItemClickListener;
 import com.gabriel.cadastrodepessoa.dao.PersonDAO;
 import com.gabriel.cadastrodepessoa.db.RegisterDB;
 import com.gabriel.cadastrodepessoa.entities.Person;
@@ -23,7 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AppConstants {
+public class MainActivity extends AppCompatActivity implements AppConstants{
 
     private FloatingActionButton fab;
     private PersonDAO dao;
@@ -78,9 +80,23 @@ public class MainActivity extends AppCompatActivity implements AppConstants {
         recyclerView.setAdapter( this.adapter );
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     private void configAdapter() {
         this.adapter = new AdapterListPerson(people,this);
-
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(Person person, int posicao) {
+                Intent openFormWithPerson = new Intent(MainActivity.this,
+                        FormularioPessoaActivity.class);
+                openFormWithPerson.putExtra(KEY_PERSON, person);
+                openFormWithPerson.putExtra(KEY_POSITION, posicao);
+                startActivityForResult(openFormWithPerson, CODIGO_REQUISICAO_ALTERA_NOTA);
+            }
+        });
     }
 
     private List<Person> getPeoples() {

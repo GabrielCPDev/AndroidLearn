@@ -1,12 +1,15 @@
 package com.gabriel.cadastrodepessoa.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
+import androidx.test.espresso.remote.EspressoRemoteMessage;
 
 import com.gabriel.cadastrodepessoa.R;
 import com.gabriel.cadastrodepessoa.dao.PersonDAO;
@@ -22,6 +25,8 @@ public class FormularioPessoaActivity extends AppCompatActivity implements AppCo
     private Button btnSave;
     private EditText name, age, adress;
     private String errorMessage = "";
+    private int positionReceived = INVALID_POSITION;
+
     private PersonDAO dao;
 
     @Override
@@ -30,9 +35,26 @@ public class FormularioPessoaActivity extends AppCompatActivity implements AppCo
         setContentView(R.layout.activity_formulario_pessoa);
         setTitle(getString(R.string.title_appbar_new_person));
         initFields();
+        getIntentToUpdatePerson();
         configSaveButton();
         dao = Room.databaseBuilder(this, RegisterDB.class, NAME_DATABASE)
                 .allowMainThreadQueries().build().getPersonDAO();
+    }
+
+    private void getIntentToUpdatePerson() {
+        Intent dataReceived = getIntent();
+        if(dataReceived.hasExtra(KEY_PERSON)){
+            setTitle(R.string.title_appbar_update_person);
+            Person personReceived = (Person) dataReceived.getSerializableExtra(KEY_PERSON);
+            positionReceived = dataReceived.getIntExtra(KEY_POSITION, INVALID_POSITION);
+            initFieldsWithPerson(personReceived);
+        }
+    }
+
+    private void initFieldsWithPerson(Person person){
+        name.setText(person.getName());
+        adress.setText(person.getAddress());
+        age.setText(String.valueOf(person.getAge()));
     }
 
     private void initFields() {
@@ -58,7 +80,25 @@ public class FormularioPessoaActivity extends AppCompatActivity implements AppCo
     }
 
     private void savePeople(Person person) {
+        if(positionReceived != -1){
+            int id = positionReceived + 1;
+            person.setId(Long.parseLong(String.valueOf(id)));
+            dao.update(person);
+        } else {
         dao.save(person);
+        }
+        String message = getMessageSuccess();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+    }
+
+    private String getMessageSuccess() {
+        String message = "";
+        if(positionReceived != -1) {
+        message = getString(R.string.message_person_updated);
+        } else {
+            message = getString(R.string.message_person_saved);
+        } return message;
     }
 
     private Person registerPerson() {

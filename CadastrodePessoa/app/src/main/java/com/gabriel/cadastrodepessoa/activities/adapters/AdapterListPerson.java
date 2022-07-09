@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gabriel.cadastrodepessoa.R;
+import com.gabriel.cadastrodepessoa.activities.adapters.listeners.OnItemClickListener;
 import com.gabriel.cadastrodepessoa.entities.Person;
 
 import java.util.List;
@@ -18,10 +19,15 @@ public class AdapterListPerson extends RecyclerView.Adapter<AdapterListPerson.Pe
 
     private final List<Person> people;
     private Context context;
+    private OnItemClickListener onItemClickListener;
 
     public AdapterListPerson(List<Person> people, Context ctx) {
         this.people = people;
         this.context = ctx;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -52,6 +58,12 @@ public class AdapterListPerson extends RecyclerView.Adapter<AdapterListPerson.Pe
         public PersonViewHolder(@NonNull View itemView) {
             super(itemView);
             initFields(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(person, getAdapterPosition());
+                }
+            });
         }
 
         private void initFields(@NonNull View itemView) {
