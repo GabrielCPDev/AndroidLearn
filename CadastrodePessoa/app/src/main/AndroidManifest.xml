@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CadastroDePessoa">
         <activity
-            android:name=".activities.FormularioPessoaActivity"
+            android:name=".activities.FormPersonActivity"
             android:exported="true"/>
 
         <activity
