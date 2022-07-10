@@ -15,4 +15,8 @@
     <string name="textMenuPesquisar">Pesquisar</string>
     <string name="textMenuSair">sair</string>
     <string name="textMenuConfiguracoes">configurações</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="conversas">conversas</string>
+    <string name="contatos">contatos</string>
 </resources>

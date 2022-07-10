@@ -3,6 +3,7 @@ package com.gabriel.whatsapp_clone.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,7 +16,12 @@ import android.view.MenuItem;
 import com.gabriel.whatsapp_clone.R;
 import com.gabriel.whatsapp_clone.configuration.FirebaseConfig;
 import com.gabriel.whatsapp_clone.databinding.ActivityMainBinding;
+import com.gabriel.whatsapp_clone.fragments.ContatosFragment;
+import com.gabriel.whatsapp_clone.fragments.ConversaFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
+import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -29,6 +35,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         auth = FirebaseConfig.getFirebaseAuth();
         configToolbar();
+        extracted();
+    }
+
+    private void extracted() {
+        FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
+                getSupportFragmentManager(),
+                FragmentPagerItems.with(getApplicationContext())
+                        .add(R.string.conversas, ConversaFragment.class)
+                        .add(R.string.contatos, ContatosFragment.class)
+                        .create()
+        );
+        ViewPager viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(adapter);
+        SmartTabLayout viewPagerTab = findViewById(R.id.viewPagerTab);
+        viewPagerTab.setViewPager(viewPager);
     }
 
     @Override
