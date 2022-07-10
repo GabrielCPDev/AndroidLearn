@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -35,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         auth = FirebaseConfig.getFirebaseAuth();
         configToolbar();
-        extracted();
+        configAbas();
     }
 
-    private void extracted() {
+    private void configAbas() {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(
                 getSupportFragmentManager(),
                 FragmentPagerItems.with(getApplicationContext())
@@ -67,8 +65,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
                 break;
+            case R.id.menuConfiguracoes:
+                openConfigurations();
+                break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openConfigurations() {
+        Intent intent = new Intent(getApplicationContext(), ConfiguracoesActivity.class);
+        startActivity(intent);
     }
 
     private void signoutUser() {
