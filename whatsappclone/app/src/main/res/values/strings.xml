@@ -12,4 +12,7 @@
     <string name="erroCadastroUsuarioSenha">Digite uma senha mais forte!</string>
     <string name="erroCadastroUsuarioExistente">Esse usuário já está cadastrado!</string>
     <string name="erroLoginUsuario">Usuario ou senha inválido!</string>
+    <string name="textMenuPesquisar">Pesquisar</string>
+    <string name="textMenuSair">sair</string>
+    <string name="textMenuConfiguracoes">configurações</string>
 </resources>
