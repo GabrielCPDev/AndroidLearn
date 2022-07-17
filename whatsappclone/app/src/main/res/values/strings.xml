@@ -22,4 +22,7 @@
     <string name="configuracoes">Configurações</string>
     <string name="inputUserName">nome de usuário </string>
     <string name="textMensagemNomeDeUsuario">Esse não é o seu nome de usuário nem sua senha. Esse nome ficará visível para seus contatos no Whatsapp-clone</string>
+    <string name="permissaoNegada">Permissões Negadas</string>
+    <string name="permissaoNegadaMessage">Para utilizar o app é necessário aceitar as permissões requeridas.</string>
+    <string name="btnConfirmarPermissao">Confirmar</string>
 </resources>
