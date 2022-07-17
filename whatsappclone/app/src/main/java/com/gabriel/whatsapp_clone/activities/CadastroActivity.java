@@ -11,6 +11,7 @@ import com.gabriel.whatsapp_clone.R;
 import com.gabriel.whatsapp_clone.configuration.FirebaseConfig;
 import com.gabriel.whatsapp_clone.databinding.ActivityCadastroBinding;
 import com.gabriel.whatsapp_clone.models.Usuario;
+import com.gabriel.whatsapp_clone.utils.Base64Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +27,6 @@ public class CadastroActivity extends AppCompatActivity {
     private FirebaseAuth auth;
 
     private Usuario usuario;
-    private DatabaseReference database;
     private OnCompleteListener<AuthResult> listenerUsuarioAuth;
 
     @Override
@@ -70,6 +70,7 @@ public class CadastroActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     Toast.makeText(getApplicationContext(), getString(R.string.sucessoCadastroUsuario), Toast.LENGTH_LONG).show();
                     finish();
+                    salvaUsuarioNoBanco();
                 } else {
                     String excecao = "";
                     try {
@@ -88,6 +89,16 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             }
         };
+    }
+
+    private void salvaUsuarioNoBanco() {
+        try {
+            usuario.setId(Base64Utils.codificarBase64(usuario.getEmail()));
+            usuario.salvar();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private boolean validaCamposPreenchidos() {
