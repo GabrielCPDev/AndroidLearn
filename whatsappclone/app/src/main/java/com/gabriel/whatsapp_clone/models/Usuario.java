@@ -1,7 +1,12 @@
 package com.gabriel.whatsapp_clone.models;
 
+import com.gabriel.whatsapp_clone.configuration.FirebaseConfig;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class Usuario {
 
+    private String id;
     private String nome;
     private String email;
     private String senha;
@@ -11,6 +16,15 @@ public class Usuario {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+
+    @Exclude
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -29,11 +43,18 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public void salvar() {
+        DatabaseReference firebaseRef = FirebaseConfig.getDatabase();
+        DatabaseReference usuario = firebaseRef.child("usuarios").child(getId());
+        usuario.setValue(this);
     }
 }
